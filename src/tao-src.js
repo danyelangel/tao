@@ -85,7 +85,6 @@ function Tao(loginObject, clientApi) {
         exports._outputRef = new Firebase(url + '/channels/' + output);
         exports._inputRef = new Firebase(url + '/channels/' + input);
 
-        exports._outputRef.onDisconnect().remove();
         exports.onReadyCallback(snapshot.val());
     }
 
