@@ -206,7 +206,7 @@ function Tao(loginObject, clientApi) {
 
         function getData(callback) {
             var _onDataready = function (snapshot) {
-                if (isEnabled) {
+                if (isEnabled()) {
                     var data = snapshot.val();
                     console.log('Data read from ' + type + ' ' + name + ': ' + data);
                     callback(data);
@@ -222,8 +222,8 @@ function Tao(loginObject, clientApi) {
                 console.log('Datachange event. Channel enabled: ' + isEnabled());
                 if (isEnabled()) {
                     callback(snapshot.val());
+                    taoStatus.set('libraryfetch');
                 }
-                taoStatus.set('libraryfetch');
             };
             channelRef.child('data').on('value', _onDatachange);
         }
