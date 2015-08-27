@@ -19,7 +19,8 @@ function Tao(loginObject, clientApi) {
         id = loginObject.id,
         _metadataRef = new Firebase(url + '/metadata/' + id),
         exports = {},
-        clientApiStatus;
+        clientApiStatus,
+        taoStatus;
 
     //Class initialization
 
@@ -86,6 +87,8 @@ function Tao(loginObject, clientApi) {
         exports._inputRef = new Firebase(url + '/channels/' + input);
 
         exports.onReadyCallback(snapshot.val());
+        
+        taoStatus = new Status('tao', {});
     }
 
     //Callback function when api call is received
@@ -220,7 +223,6 @@ function Tao(loginObject, clientApi) {
                 if (isEnabled()) {
                     callback(snapshot.val());
                 }
-                channelRef.child('data').remove();
             };
             channelRef.child('data').on('value', _onDatachange);
         }
@@ -262,13 +264,19 @@ function Tao(loginObject, clientApi) {
         var ref = _metadataRef.child('moduleStatus').child(name);
 
         function log(data) {
-            var date = new Date();
-            ref.child('statusLog').child(date.toString()).set(data);
+            ref.child('statusLog').push(data);
+
+            //Set the status description if it exists
+            if (settings.statusMessages[data]) {
+                ref.child('statusDescription').add(settings.statusMessages[data]);
+            } else {
+                ref.child('statusDescription').add('Unknown status');
+            }
         }
 
         function set(data) {
             if (data) {
-                ref.child('status').set(data);
+                ref.child('status').push(data);
 
                 //Set the status description if it exists
                 if (settings.statusMessages[data]) {
