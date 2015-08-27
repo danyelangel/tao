@@ -24,7 +24,7 @@ function Tao(loginObject, clientApi) {
 
     //Class initialization
 
-    (function constructor() {
+    function constructor() {
         //Check data
         if (!checkinput()) {
             return false;
@@ -50,7 +50,7 @@ function Tao(loginObject, clientApi) {
 
         //Listen for client API
         _metadataRef.child('api').on('value', _clientApi);
-    })();
+    }
 
     //Internal Functions
 
@@ -87,7 +87,7 @@ function Tao(loginObject, clientApi) {
         exports._inputRef = new Firebase(url + '/channels/' + input);
 
         exports.onReadyCallback(snapshot.val());
-        
+
         taoStatus = new Status('tao', {});
     }
 
@@ -292,6 +292,8 @@ function Tao(loginObject, clientApi) {
 
     exports.Channel = Channel;
     exports.Status = Status;
+
+    constructor();
 
     return exports;
 }
