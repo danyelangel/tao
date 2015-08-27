@@ -1,6 +1,6 @@
 {
     "name": "tao",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "main": "tao.min.js",
     "description": "A connector to the Tao protocol which is based on top of Firebase",
     "repository": {

@@ -309,5 +309,5 @@ function Tao(loginObject, clientApi) {
 }
 
 // Version.
-Tao.VERSION = '0.0.0';
+Tao.VERSION = '0.0.1';
 
