@@ -1,9 +1,14 @@
-(function(root, undefined) {
-
-  "use strict";
-
+"use strict";
 
 /* tao main */
+/**
+ * Merge defaults with user options
+ * @private
+ * @param {Object} defaults Default settings
+ * @param {Object} options User options
+ * @returns {Object} Merged values of defaults and options
+ */
+
 
 // Base function.
 //Dependencies: Firebase
@@ -11,7 +16,7 @@ function Tao(loginObject, clientApi) {
     var name = loginObject.name,
         url = loginObject.url,
         id = loginObject.id,
-        _metadataRef = new root.Firebase(url + '/metadata/' + id),
+        _metadataRef = new Firebase(url + '/metadata/' + id),
         exports = {},
         clientApiStatus;
 
@@ -76,8 +81,8 @@ function Tao(loginObject, clientApi) {
         var input = snapshot.child('input').val(),
             output = snapshot.child('output').val();
 
-        exports._outputRef = new root.Firebase(url + '/channels/' + output);
-        exports._inputRef = new root.Firebase(url + '/channels/' + input);
+        exports._outputRef = new Firebase(url + '/channels/' + output);
+        exports._inputRef = new Firebase(url + '/channels/' + input);
 
         exports._outputRef.onDisconnect().remove();
         exports.onReadyCallback(snapshot.val());
@@ -96,6 +101,22 @@ function Tao(loginObject, clientApi) {
         console.log('*** TaoConnect has encountered an error: ' + err + ' ***');
     }
 
+    // Option extender
+    function extend(defaults, options) {
+        var extended = {};
+        var prop;
+        for (prop in defaults) {
+            if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
+                extended[prop] = defaults[prop];
+            }
+        }
+        for (prop in options) {
+            if (Object.prototype.hasOwnProperty.call(options, prop)) {
+                extended[prop] = options[prop];
+            }
+        }
+        return extended;
+    }
 
     //Class Methods
 
@@ -287,41 +308,6 @@ function Tao(loginObject, clientApi) {
     return exports;
 }
 
-
-
-module.exports = Tao;
-
-/**
- * Merge defaults with user options
- * @private
- * @param {Object} defaults Default settings
- * @param {Object} options User options
- * @returns {Object} Merged values of defaults and options
- */
-function extend(defaults, options) {
-    var extended = {};
-    var prop;
-    for (prop in defaults) {
-        if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
-            extended[prop] = defaults[prop];
-        }
-    }
-    for (prop in options) {
-        if (Object.prototype.hasOwnProperty.call(options, prop)) {
-            extended[prop] = options[prop];
-        }
-    }
-    return extended;
-}
-
-
-
-
 // Version.
 Tao.VERSION = '0.0.0';
 
-
-// Export to the root, which is probably `window`.
-root.Tao = Tao;
-
-}(this));
