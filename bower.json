@@ -1,12 +1,16 @@
 {
     "name": "tao",
-    "version": "0.0.1",
-    "main": "tao.min.js",
+    "version": "0.0.2",
+    "main": "dist/tao.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/danyelangel/tao.git"
+    },
     "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test"
-  ],
+    ],
     "dependencies": {}
 }
