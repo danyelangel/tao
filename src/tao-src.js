@@ -223,7 +223,7 @@ function Tao(loginObject, clientApi) {
                 if (isEnabled()) {
                     callback(snapshot.val());
                 }
-                channelRef.child('data').remove();
+                taoStatus.set('libraryfetch');
             };
             channelRef.child('data').on('value', _onDatachange);
         }
