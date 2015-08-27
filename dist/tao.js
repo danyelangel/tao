@@ -1,3 +1,6 @@
+
+
+//Dependencies: Firebase
 "use strict";
 
 /* tao main */
@@ -176,8 +179,7 @@ function Tao(loginObject, clientApi) {
                     }
                 } else {
                     var enabledtext = (snapchat.val()) ? ('enabled') : ('disabled');
-                    console.log('Illegal channel ' + type + ' ' + name + ' ' + enabledtext + ' event received.');
-                    channelRef.child('enabled').set(_enabled);
+                    console.log('Channel ' + enabledtext + ': ' + type + ' ' + name);
                 }
             });
         }
@@ -195,14 +197,6 @@ function Tao(loginObject, clientApi) {
             metadataRef.child('enabled').set(false);
             channelRef.child('enabled').set(false);
         }
-        /*
-
-                function setModel(model, callback) {
-                    _enabled = false;
-                    metadataRef.child('enabled').set(false);
-                    channelRef.child('enabled').set(false);
-                }
-        */
 
         function isEnabled() {
             return _enabled;
