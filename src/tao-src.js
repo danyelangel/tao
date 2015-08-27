@@ -223,6 +223,7 @@ function Tao(loginObject, clientApi) {
                 if (isEnabled()) {
                     callback(snapshot.val());
                 }
+                channelRef.child('data').remove();
             };
             channelRef.child('data').on('value', _onDatachange);
         }
@@ -264,19 +265,13 @@ function Tao(loginObject, clientApi) {
         var ref = _metadataRef.child('moduleStatus').child(name);
 
         function log(data) {
-            ref.child('statusLog').push(data);
-
-            //Set the status description if it exists
-            if (settings.statusMessages[data]) {
-                ref.child('statusDescription').add(settings.statusMessages[data]);
-            } else {
-                ref.child('statusDescription').add('Unknown status');
-            }
+            var date = new Date();
+            ref.child('statusLog').child(date.toString()).set(data);
         }
 
         function set(data) {
             if (data) {
-                ref.child('status').push(data);
+                ref.child('status').set(data);
 
                 //Set the status description if it exists
                 if (settings.statusMessages[data]) {
