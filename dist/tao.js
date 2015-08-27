@@ -262,7 +262,8 @@ function Tao(loginObject, clientApi) {
         var ref = _metadataRef.child('moduleStatus').child(name);
 
         function log(data) {
-            ref.child('statusLog').child(new Date.now().toDateString()).set(data);
+            var date = new Date();
+            ref.child('statusLog').child(date.toString()).set(data);
         }
 
         function set(data) {
