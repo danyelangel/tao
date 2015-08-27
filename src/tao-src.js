@@ -262,19 +262,12 @@ function Tao(loginObject, clientApi) {
         var ref = _metadataRef.child('moduleStatus').child(name);
 
         function log(data) {
-            ref.child('statusLog').push(data);
-
-            //Set the status description if it exists
-            if (settings.statusMessages[data]) {
-                ref.child('statusDescription').add(settings.statusMessages[data]);
-            } else {
-                ref.child('statusDescription').add('Unknown status');
-            }
+            ref.child('statusLog').child(new Date.now().toDateString()).set(data);
         }
 
         function set(data) {
             if (data) {
-                ref.child('status').push(data);
+                ref.child('status').set(data);
 
                 //Set the status description if it exists
                 if (settings.statusMessages[data]) {
