@@ -40,8 +40,7 @@ function Tao(loginObject, clientApi) {
         //Set disconnect callbacks to destroy objects
         removeOnDisconnect(
             [
-                'isTurnedOn',
-                'moduleStatus'
+                'isTurnedOn'
             ]
         );
 
