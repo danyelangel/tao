@@ -1,0 +1,86 @@
+var model = {
+    'datasets': {
+        'datasetId': {
+            'channel': {
+                'data': 57,
+                'type': 'midi',
+                'enabled': true
+            },
+            'channel': {
+                'data': {},
+                'type': 'json',
+                'enabled': true
+            }
+        }
+    },
+    'devices': {
+        '$device_id': {
+            'api': '',
+            'connected': true,
+            'status': {
+                'statusId': {
+                    'current': '',
+                    'log': {
+                        'date': 'status'
+                    }
+                }
+            }
+        }
+    }
+};
+
+var security = {
+    'data': {
+        'datasets': {
+            '$dataset_id': {
+                'json': {
+                    '$channel_id': {
+                        'data': {
+                            '.validate': '!newData.isNumber() && !newData.isString() && !newData.isBoolean()',
+                            '.read': '',
+                            '.write': 'auth'
+                        },
+                        'enabled': {
+                            '.validate': 'newData.isBoolean()',
+                            '.read': '',
+                            '.write': ''
+                        }
+                    }
+                },
+                'midi': {
+                    '$channel_id': {
+                        'data': {
+                            '.validate': 'newData.isNumber()',
+                            '.read': '',
+                            '.write': ''
+                        },
+                        'enabled': {
+                            '.validate': 'newData.isBoolean()',
+                            '.read': '',
+                            '.write': ''
+                        }
+                    }
+                }
+            }
+        },
+        rules: {
+            '$dataset_id': {
+                
+            }
+        }
+    },
+    'devices': {
+        '$device_id': {
+            'api': '',
+            'connected': true,
+            'status': {
+                'statusId': {
+                    'current': '',
+                    'log': {
+                        'date': 'status'
+                    }
+                }
+            }
+        }
+    }
+};
