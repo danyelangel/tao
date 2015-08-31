@@ -234,6 +234,7 @@ function Tao(loginObject, clientApi) {
                 }
             };
             channelRef.child('enabled').on('value', _onEnable);
+            channelRef.child('enabled').once('value', _onEnable);
         }
         
         function onDisable(callback) {
@@ -243,6 +244,7 @@ function Tao(loginObject, clientApi) {
                 }
             };
             channelRef.child('enabled').on('value', _onDisable);
+            channelRef.child('enabled').once('value', _onDisable);
         }
 
         function disconnect() {
