@@ -10,7 +10,6 @@
  * @returns {Object} Merged values of defaults and options
  */
 
-
 // Base function.
 //Dependencies: Firebase
 function Tao(loginObject, clientApi) {
@@ -221,13 +220,12 @@ function Tao(loginObject, clientApi) {
                 console.log('Datachange event. Channel enabled: ' + isEnabled());
                 if (isEnabled()) {
                     callback(snapshot.val());
-                    taoStatus.set('libraryfetch');
                 }
             };
             channelRef.child('data').on('value', _onDatachange);
             channelRef.child('data').once('value', _onDatachange);
         }
-        
+
         function onEnable(callback) {
             var _onEnable = function (snapshot) {
                 if (snapshot.val()) {
@@ -237,7 +235,7 @@ function Tao(loginObject, clientApi) {
             channelRef.child('enabled').on('value', _onEnable);
             channelRef.child('enabled').once('value', _onEnable);
         }
-        
+
         function onDisable(callback) {
             var _onDisable = function (snapshot) {
                 if (!snapshot.val()) {
@@ -260,12 +258,17 @@ function Tao(loginObject, clientApi) {
             }
         }
 
+        function removeOnDisconnect() {
+            channelRef.child('data').onDisconnect().remove();
+        }
+
         this.setData = setData;
         this.disconnect = disconnect;
         this.getData = getData;
         this.enable = enable;
         this.disable = disable;
         this.isEnabled = isEnabled;
+        this.removeOnDisconnect = removeOnDisconnect;
         this.watch = watch;
         this.onEnable = onEnable;
         this.onDisable = onDisable;
