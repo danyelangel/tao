@@ -225,6 +225,7 @@ function Tao(loginObject, clientApi) {
                 }
             };
             channelRef.child('data').on('value', _onDatachange);
+            channelRef.child('data').once('value', _onDatachange);
         }
         
         function onEnable(callback) {
