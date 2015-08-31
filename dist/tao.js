@@ -226,6 +226,24 @@ function Tao(loginObject, clientApi) {
             };
             channelRef.child('data').on('value', _onDatachange);
         }
+        
+        function onEnable(callback) {
+            var _onEnable = function (snapshot) {
+                if (snapshot.val()) {
+                    callback();
+                }
+            };
+            channelRef.child('enabled').on('value', _onEnable);
+        }
+        
+        function onDisable(callback) {
+            var _onDisable = function (snapshot) {
+                if (!snapshot.val()) {
+                    callback();
+                }
+            };
+            channelRef.child('enabled').on('value', _onDisable);
+        }
 
         function disconnect() {
             channelRef.child('data').off('value');
@@ -246,6 +264,8 @@ function Tao(loginObject, clientApi) {
         this.disable = disable;
         this.isEnabled = isEnabled;
         this.watch = watch;
+        this.onEnable = onEnable;
+        this.onDisable = onDisable;
 
         constructor();
         getData(function (data) {
