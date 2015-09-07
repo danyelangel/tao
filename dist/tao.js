@@ -160,8 +160,6 @@ function Tao(loginObject, clientApi) {
 
             enable();
             metadataRef.child('enabled').on('value', function (snapchat) {
-                var enabledtext = (snapchat.val()) ? ('enabled') : ('disabled');
-                console.log('Channel ' + type + ' ' + name + ' ' + enabledtext);
                 if (snapchat.val()) {
                     enable();
                 } else {
@@ -175,9 +173,6 @@ function Tao(loginObject, clientApi) {
                     } else {
                         disable();
                     }
-                } else {
-                    var enabledtext = (snapchat.val()) ? ('enabled') : ('disabled');
-                    console.log('Channel ' + enabledtext + ': ' + type + ' ' + name);
                 }
             });
         }
@@ -206,7 +201,6 @@ function Tao(loginObject, clientApi) {
             var _onDataready = function (snapshot) {
                 if (isEnabled()) {
                     var data = snapshot.val();
-                    console.log('Data read from ' + type + ' ' + name + ': ' + data);
                     callback(data);
                 } else {
                     callback(_data);
@@ -217,7 +211,6 @@ function Tao(loginObject, clientApi) {
 
         function watch(callback) {
             var _onDatachange = function (snapshot) {
-                console.log('Datachange event. Channel enabled: ' + isEnabled());
                 if (isEnabled()) {
                     callback(snapshot.val());
                 }
