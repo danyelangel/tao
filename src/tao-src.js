@@ -160,23 +160,24 @@ function Tao(loginObject, clientApi) {
 
             if (type == "input") {
                 enable();
-            }
-            metadataRef.child('enabled').on('value', function (snapchat) {
-                if (snapchat.val()) {
-                    enable();
-                } else {
-                    disable();
-                }
-            });
-            channelRef.child('enabled').on('value', function (snapchat) {
-                if (snapchat.val() == _enabled) {
-                    if (snapchat.val() === true) {
+
+                metadataRef.child('enabled').on('value', function (snapchat) {
+                    if (snapchat.val()) {
                         enable();
                     } else {
                         disable();
                     }
-                }
-            });
+                });
+                channelRef.child('enabled').on('value', function (snapchat) {
+                    if (snapchat.val() == _enabled) {
+                        if (snapchat.val() === true) {
+                            enable();
+                        } else {
+                            disable();
+                        }
+                    }
+                });
+            }
         }
 
         //Set functions
