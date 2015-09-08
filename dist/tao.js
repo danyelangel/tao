@@ -158,7 +158,9 @@ function Tao(loginObject, clientApi) {
 
             metadataRef = _metadataRef.child('channels').child(type).child(name);
 
-            enable();
+            if (type == "output") {
+                enable();
+            }
             metadataRef.child('enabled').on('value', function (snapchat) {
                 if (snapchat.val()) {
                     enable();
