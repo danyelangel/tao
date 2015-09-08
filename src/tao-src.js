@@ -170,7 +170,7 @@ function Tao(loginObject, clientApi) {
             });
             channelRef.child('enabled').on('value', function (snapchat) {
                 if (snapchat.val() == _enabled) {
-                    if (snapchat.val()) {
+                    if (snapchat.val() === true) {
                         enable();
                     } else {
                         disable();
