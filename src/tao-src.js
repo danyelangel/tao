@@ -168,16 +168,11 @@ function Tao(loginObject, clientApi) {
                         disable();
                     }
                 });
-                channelRef.child('enabled').on('value', function (snapchat) {
-                    if (snapchat.val() == _enabled) {
-                        if (snapchat.val() === true) {
-                            enable();
-                        } else {
-                            disable();
-                        }
-                    }
-                });
             }
+            channelRef.child('enabled').on('value', function (snapchat) {
+                _enabled = snapchat.val();
+            });
+
         }
 
         //Set functions
